@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark-Love-MD Giveaway</title>
+    <style>
+    body {
+    background-color: blue ; /* blue background */
+    color: #333;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 130vh;
+}
+
+.container {
+    background-color: purple; /* Darker red */
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    width: 70%;
+    max-width: 450px;
+    transition: all 0.3s ease;
+}
+
+h1 {
+    text-align: center;
+    color: red; /* White heading */
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: pink; /* White labels */
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #ffffff; /* Button background */
+    color: #ff4757; /* Text color */
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #ff4d00; /* Darker red on hover */
+    color: white;
+}
+
+p {
+    margin: 5px 0; /* Space for <p> tags */
+}
+
+.hidden {
+    display: none; /* Hide elements */
+}
+    </style>
+</head>
+<body>
+    <div class="container" id="giveawayContainer">
+        <h1>Dark-Love-MD Giveaway</h1>
+        <form id="giveawayForm" onsubmit="sendGiveaway(event)">
+            <p>
+                <label for="subject">Subject:</label><br>
+                <input type="text" id="subject" name="subject" required>
+            </p>
+            <p>
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" required>
+            </p>
+            <p>
+                <label for="number">Number:</label><br>
+                <input type="tel" id="number" name="number" required>
+            </p>
+            <p>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required>
+            </p>
+            <p>
+                <label for="message">Message:</label><br>
+                <textarea id="message" name="message" rows="4" required></textarea>
+            </p>
+            <button type="submit">Send</button>
+        </form>
+
+        <p>
+            <button id="requestBtn" onclick="toggleRequestForm()">Request</button>
+        </p>
+    </div>
+
+    <div class="container hidden" id="requestContainer">
+        <h1>Request Form</h1>
+        <form id="requestForm" onsubmit="sendRequest(event)">
+            <p>
+                <label for="channel">From:</label><br>
+                <input type="text" id="channel" name="channel" placeholder="Dark-Love-MD Channel" required>
+            </p>
+            <p>
+                <label for="requestNumber">Number:</label><br>
+                <input type="tel" id="requestNumber" name="requestNumber" required>
+            </p>
+            <p>
+                <label for="requestEmail">Your Email:</label><br>
+                <input type="email" id="requestEmail" name="requestEmail" required>
+            </p>
+            <p>
+                <label for="requestMessage">Message:</label><br>
+                <textarea id="requestMessage" name="requestMessage" rows="4" required></textarea>
+            </p>
+            <button type="submit">Submit Request</button>
+        </form>
+        <p>
+            <button onclick="toggleGiveawayForm()">Back to Giveaway</button>
+        </p>
+    </div>
+
+    <script>
+    function toggleRequestForm() {
+    document.getElementById('giveawayContainer').classList.add('hidden');
+    document.getElementById('requestContainer').classList.remove('hidden');
+}
+
+function toggleGiveawayForm() {
+    document.getElementById('requestContainer').classList.add('hidden');
+    document.getElementById('giveawayContainer').classList.remove('hidden');
+}
+
+function sendGiveaway(event) {
+    event.preventDefault(); // Prevent the form from submitting the default way
+
+    // Collect the form data
+    const subject = document.getElementById('subject').value;
+    const name = document.getElementById('name').value;
+    const number = document.getElementById('number').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    // Create a WhatsApp message URL
+    const giveawayMessage = `Subject: ${subject}\nName: ${name}\nNumber: ${number}\nEmail: ${email}\nMessage: ${message}`;
+    const whatsappLink = `https://wa.me/08122441244?text=${encodeURIComponent(giveawayMessage)}`;
+
+    // Open WhatsApp with the pre-filled message
+    window.open(whatsappLink, '_blank'); // Open WhatsApp in a new tab
+}
+
+function sendRequest(event) {
+    event.preventDefault(); // Prevent the form from submitting the default way
+
+    // Collect the request data
+    const channel = document.getElementById('channel').value;
+    const requestNumber = document.getElementById('requestNumber').value;
+    const requestEmail = document.getElementById('requestEmail').value;
+    const requestMessage = document.getElementById('requestMessage').value;
+
+    // Create a WhatsApp message URL
+    const requestMsg = `From: ${channel}\nNumber: ${requestNumber}\nEmail: ${requestEmail}\nMessage: ${requestMessage}`;
+    const whatsappLink = `https://wa.me/08122441244?text=${encodeURIComponent(requestMsg)}`;
+
+    // Open WhatsApp with the pre-filled message
+    window.open(whatsappLink, '_blank'); // Open WhatsApp in a new tab
+}
+    </script>
+</body>
+</html>
